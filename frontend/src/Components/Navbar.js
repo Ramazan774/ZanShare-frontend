@@ -1,32 +1,26 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logoutSuccess} from '../actions/auth'
+import { Link } from 'react-router-dom'
 
 class Navbar extends React.Component {
-
-    handleLogout = () => {
-        localStorage.removeItem('app_token')
-        this.props.logoutSuccess
-    }
-
     render () {
         return (
-            <div>
-                <p>Navbar</p>
+            <div className={`ui inverted blue menu`}>
+                <Link className='ui header' to='/home'>
+                    <i className={`${this.props.icon} icon`} />
+                    <div className='content'>{this.props.title}</div>
+                    <div className='sub header'>{this.props.description}</div>
+                </Link>
+                <div className='right menu'>
+                    <Link className='item' to='/login'>
+                        Login
+                    </Link>
+                    <Link className='item' to='/signup'>
+                        Sign Up
+                    </Link>
+                </div>
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.auth
-    }
-}
-
-const mapDispatchToProps = {
-    logoutSuccess
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default Navbar

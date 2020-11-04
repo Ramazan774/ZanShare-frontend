@@ -1,7 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
-import {currentUser} from '../actions/auth'
+// import {currentUser} from '../actions/auth'
 
 class Home extends React.Component {
 
@@ -36,14 +36,5 @@ class Home extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.auth
-    }
-}
 
-const mapDispatchToProps = {
-    currentUser
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home

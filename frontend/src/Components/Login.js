@@ -1,12 +1,11 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {loginSuccess} from '../actions/auth'
+import {Link} from 'react-router-dom'
 
-class Login extends Component {
+class Login extends React.Component {
 
     state = {
-        email: 'fake@fake.com',
-        password: 'hello',
+        email: '',
+        password: '',
         error: null
     }
 
@@ -27,7 +26,7 @@ class Login extends Component {
             body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3000/api/v1/auth', reqObj)
+        fetch('http://localhost:3000/auth', reqObj)
         .then(resp => resp.json())
         .then(data => {
             if(data.error) {
@@ -36,9 +35,7 @@ class Login extends Component {
                 })
             } else {
                 localStorage.setItem('app_token', data.token)
-
-                this.props.loginSuccess(data.user)
-                this.props.history.push('/home')
+                this.props.history.push('/')
             }
         })
     }
@@ -46,21 +43,18 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className='loginform text-center'>
                 <h3>Log in</h3>
                 { this.state.error && <h4 style={{color: 'red'}}>{this.state.error}</h4> }
                 <form onSubmit={this.handleSubmit}>
-                    <input name={'email'} onChange={this.handleInputChange} value={this.state.email} />
-                    <input name={'password'} onChange={this.handleInputChange} value={this.state.password} />
-                    <input type='submit' value='login' />
+                    <input name={'email'} onChange={this.handleInputChange} value={this.state.email} placeholder='Email' />
+                    <input name={'password'} onChange={this.handleInputChange} value={this.state.password} placeholder='Password' />
+                    <button className='btn btn-primary' type='submit'>Login</button>
                 </form>
+                <Link className='home-link loginLink' to='/signup'>Not a member yet?</Link>
             </div>
         )
     }
 }
 
-const mapDispatchToProps = {
-    loginSuccess
-}
-
-export default connect(null, mapDispatchToProps)(Login)
+export default Login
