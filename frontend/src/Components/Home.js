@@ -1,6 +1,7 @@
 import React from 'react'
-import ProductsContainer from './containers/ProductsContainer'
-import ProductShowPage from '.components/ProductShowPage'
+import { Input } from 'semantic-ui-react'
+import ProductsContainer from './ProductsContainer'
+import ProductShowPage from './ProductShowPage'
 
 class Home extends React.Component {
 
@@ -45,6 +46,7 @@ class Home extends React.Component {
         return (
             <div className='App'>
                 <br></br>
+                <input icon='search' placeholder='Search...' />
                 {this.renderProducts()}
                 <br></br>
             </div>
