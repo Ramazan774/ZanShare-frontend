@@ -1,58 +1,37 @@
 import React from 'react'
-import { Input } from 'semantic-ui-react'
-import ProductsContainer from './ProductsContainer'
-import ProductShowPage from './ProductShowPage'
+import { Input, Menu } from 'semantic-ui-react'
+import { searchProducts } from '../actions/search'
+// import { Link } from 'react-router-dom'
 
 class Home extends React.Component {
 
-    componentDidMount(){
-        const token = localStorage.getItem('app_token')
-
-        if(!token){
-            this.props.history.push('/login')
-        } else {
-
-            const reqObj = {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-            }
-
-            fetch('http://localhost:3000/current_user', reqObj)
-            .then(resp => resp.json())
-            .then(data => {
-                if(data.user) {
-                    this.props.currentUser(data.user)
-                    fetch('http://localhost:3000/products')
-                    .then(resp => resp.json())
-                    .then(products => {
-                        let newProducts = products.filter(product => product.user_id === data.user.id)
-                        this.props.fetchProductsSuccess(newProducts)
-                    })
-                }
-            })
-        }
-    }
-
-    renderProducts = () => {
-        let productsList = this.props.notes.filter(products => products.title.toLowerCase().includes(this.props.search.toLowerCase()))
-        return productsList.map((product, index) => (
-            <ProductShowPage key={index} product={product} history={this.props.history} />
-        ))
+    handleChange = (e) => {
+        e.persist()
+        this.props.searchProducts(e)
     }
 
     render() {
         return (
-            <div className='App'>
-                <br></br>
-                <input icon='search' placeholder='Search...' />
-                {this.renderProducts()}
-                <br></br>
-            </div>
+            <Menu>
+                <Menu.Menu>
+                    <Input onChange={this.handleChange} icon='search' placeholder='Search...' />
+                </Menu.Menu>
+            </Menu>
         )
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+        search: state.search
+    }
+}
 
-export default Home
+const mapDispatchToProps = {
+    logoutSuccess,
+    searchProducts
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

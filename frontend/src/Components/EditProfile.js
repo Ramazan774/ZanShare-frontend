@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { deleteUser } from '../actions/user'
-import {editUserSuccess } from '../actions/user'
+import { editUserSuccess } from '../actions/user'
 import { Link } from 'react-router-dom'
 import { Button, Form } from 'semantic-ui-react'
 
@@ -62,8 +62,11 @@ class EditProfile extends React.Component {
     }
 
     deleteUser = (id) => {
+        const reqObj = {
+            method: 'DELETE'
+        }
 
-        fetch(`http://localhost:3000/users/${id}`, method: 'DELETE')
+        fetch(`http://localhost:3000/users/${id}`, reqObj)
         .then(resp => resp.json())
         .then(data => {
             this.props.deleteUser(id)
@@ -71,4 +74,63 @@ class EditProfile extends React.Component {
         })
     }
 }
+
+    render() {
+        return (
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Field
+                    name='first name'
+                    placeholder='First Name'
+                    onChange={this.handleChange}
+                    value={this.state.first_name}
+                />
+                <Form.Field
+                    name='last name'
+                    placeholder='Last Name'
+                    onChange={this.handleChange}
+                    value={this.state.last_name}
+                />
+                <Form.Field required
+                    name='email'
+                    placeholder='Email'
+                    onChange={this.handleChange}
+                    value={this.state.email}
+                />
+                <Form.Field
+                    name='age'
+                    placeholder='Age'
+                    onChange={this.handleChange}
+                    value={this.state.age}
+                />
+                <Form.Field
+                    name='phone number'
+                    placeholder='(xxx) xxx xxxx'
+                    onChange={this.handleChange}
+                    value={this.state.phone_number}
+                />
+                <Form.Field
+                    name='password'
+                    type='password'
+                    placeholder='Password'
+                    onChange={this.handleChange}
+                    value={this.state.password}
+                />
+                <Button type='submit'>Update</Button>
+                <Button onClick={() => this.deleteUser(this.props.user.id)}>Delete Profile</Button>
+            </Form>
+        )
+    }
+
+    const mapStateToProps = (state) => {
+        return {
+            user: state.user,
+        }
+    }
+
+    const mapDispatchToProps = {
+        deleteUser,
+        editUserSuccess
+    }
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)
 

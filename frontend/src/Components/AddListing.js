@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Checkbox, Form, Input, TextArea} from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { addListingSuccess } from '../actions/listing'
+import { addListingSuccess } from '../actions/listings'
 
 class AddListing extends React.Component {
     state = {
@@ -28,8 +28,7 @@ class AddListing extends React.Component {
         const reqObj = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                id: `${this.props.user.id}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 id: this.state.id,

@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar'
 import Login from '../component/Login'
 import SignUp from '../components/SignUp'
 import Home from '../components/Home'
-import Profile from '../components/Profile'
 import EditProfile from '../components/EditProfile'
 import AddListing from '../components/AddListing'
 import EditListing from '../components/EditListing'
@@ -21,7 +20,6 @@ class App extends React.Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={SignUp} />
-              <Route path="/profile" component={Profile} />
               <Route path="/editprofile/:id" component={EditProfile} />
               <Route exact path="/products" component={ProductsContainer} />
               <Route path="/products/:id" component={ProductShowPage} />

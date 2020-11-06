@@ -1,9 +1,14 @@
 import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 import ProductShowPage from './ProductShowPage'
 import { connect } from 'react-redux'
 import { fetchProductsSuccess } from '../actions/products'
 
 class ProductsContainer extends React.Component {
+    state= {}
+    constructor(props) {
+        super(props)
+    }
 
     componentDidMount(){
         fetch('http://localhost:3000/products')
@@ -14,19 +19,28 @@ class ProductsContainer extends React.Component {
     }
 
     renderProducts = () => {
-        return this.props.products.map(p => {
+        const allProducts = this.props.products.map(p => {
             <ProductShowPage
+                key = {p.id}
                 product = {p}
             />
         })
+
+        return <div>
+            <h1>All products</h1>
+            <div className='ui items'>{allProducts}</div>
+        </div>
     }
 
     render(){
-        return(
-            <div>
-                <h1>ProductsContainer</h1>
-                <div className='ui items'>{this.renderProducts()}</div>
-            </div>
+        return (
+            <Switch>
+                <Route path='/products/:id' render={(route) => {
+                    const id = route.match.params.id
+                    const product = this.state.products.find(product => product.id == id)
+                    return <ProductShowPage product={product} />
+                }} />
+            </Switch>
         )
     }
 }
@@ -42,3 +56,40 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
+
+// componentDidMount(){
+    //     const token = localStorage.getItem('app_token')
+
+    //     if(!token){
+    //         this.props.history.push('/login')
+    //     } else {
+
+    //         const reqObj = {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Authorization': `Bearer ${token}`
+    //             },
+    //         }
+
+    //         fetch('http://localhost:3000/current_user', reqObj)
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             if(data.user) {
+    //                 this.props.currentUser(data.user)
+    //                 fetch('http://localhost:3000/products')
+    //                 .then(resp => resp.json())
+    //                 .then(products => {
+    //                     let newProducts = products.filter(product => product.user_id === data.user.id)
+    //                     this.props.fetchProductsSuccess(newProducts)
+    //                 })
+    //             }
+    //         })
+    //     }
+    // }
+
+    // renderProducts = () => {
+    //     let productsList = this.props.notes.filter(products => products.title.toLowerCase().includes(this.props.search.toLowerCase()))
+    //     return productsList.map((product, index) => (
+    //         <ProductShowPage key={index} product={product} history={this.props.history} />
+    //     ))
+    // }

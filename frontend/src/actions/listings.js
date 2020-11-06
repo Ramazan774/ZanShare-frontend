@@ -5,9 +5,9 @@ export const fetchListingsSuccess = (listings) => {
     }
 }
 
-export const newListingSuccess = (listings) => {
+export const addListingSuccess = (listings) => {
     return {
-        type: 'NEW_LISTING_SUCCESS',
+        type: 'ADD_LISTING_SUCCESS',
         listings: listings
     }
 }
