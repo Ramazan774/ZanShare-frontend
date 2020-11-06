@@ -1,5 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { Grid, Button, Form, Container } from 'semantic-ui-react'
+import { loginSuccess } from '../actions/user'
+import { connect } from 'react-redux'
 
 class Login extends React.Component {
 
@@ -35,6 +38,7 @@ class Login extends React.Component {
                 })
             } else {
                 localStorage.setItem('app_token', data.token)
+                this.props.loginSuccess(data.user)
                 this.props.history.push('/')
             }
         })
@@ -43,18 +47,56 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className='loginform text-center'>
-                <h3>Log in</h3>
-                { this.state.error && <h4 style={{color: 'red'}}>{this.state.error}</h4> }
-                <form onSubmit={this.handleSubmit}>
-                    <input name={'email'} onChange={this.handleInputChange} value={this.state.email} placeholder='Email' />
-                    <input name={'password'} onChange={this.handleInputChange} value={this.state.password} placeholder='Password' />
-                    <button className='btn btn-primary' type='submit'>Login</button>
-                </form>
-                <Link className='home-link loginLink' to='/signup'>Not a member yet?</Link>
+            <div>
+                <Container>
+                    <Grid>
+                        <Grid.Row centered>
+                            <Grid.Column width={7}>
+                                {this.state.error && <h4 style={{ color: 'red' }}>{this.state.error}</h4>}
+                                <Form onSubmit={this.handleSubmit}></Form>
+                                <br></br>
+                                    <Form.Input
+                                        icon='user'
+                                        iconPosition='left'
+                                        type='text'
+                                        placeholder='Email'
+                                        name={'email'}
+                                        onChange={this.handleInputChange}
+                                        value={this.state.email}
+                                    />
+                                <Form.Input
+                                    icon='lock'
+                                    iconPosition='left'
+                                    type='password'
+                                    placeholder='Email'
+                                    name={'password'}
+                                    onChange={this.handleInputChange}
+                                    value={this.state.password}
+                                />
+                                <div style={{textAlign: 'center'}}>
+                                    <Button animated='fade'>
+                                        <Button.Content visible><i aria-hidden="true" className="sign in icon"></i></Button.Content>
+                                        <Button.Content hidden style={{ color: 'blue' }}>Login</Button.Content>
+                                    </Button>
+                                </div>
+                                <br></br> <br></br>
+                                <div style={{ textAlign: "center" }}>
+                                    <Button animated='fade'>
+                                        <Button.Content visible>Sign up</Button.Content>
+                                        <Button.Content hidden as={Link} to={'/newuser'} style={{ color: 'blue' }}>Sign up</Button.Content>
+                                    </Button>  
+                                </div>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Container>
             </div>
         )
     }
 }
 
-export default Login
+const mapDispatchToProps = {
+    loginSuccess
+}
+
+export default connect(null, mapDispatchToProps)(Login)

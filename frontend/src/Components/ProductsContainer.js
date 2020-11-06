@@ -1,19 +1,44 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import ProductShow from './ProductShow'
-import Product from './Product'
+import ProductShowPage from './ProductShowPage'
 import { connect } from 'react-redux'
-import { thunkFetchProducts } from '../actions/index'
+import { fetchProductsSuccess } from '../actions/products'
 
-class ProductList extends React.Component {
-    state = {foo: 'bar'}
-    constructor(props){
-        super(props)
-    }
+class ProductsContainer extends React.Component {
 
     componentDidMount(){
-        this.props.thunkFetchProducts()
+        fetch('http://localhost:3000/products')
+        .then(resp => resp.json())
+        .then(products => {
+            this.props.fetchProductsSuccess(products)
+        })
     }
 
-    
+    renderProducts = () => {
+        return this.props.products.map(p => {
+            <ProductShowPage
+                product = {p}
+            />
+        })
+    }
+
+    render(){
+        return(
+            <div>
+                <h1>ProductsContainer</h1>
+                <div className='ui items'>{this.renderProducts()}</div>
+            </div>
+        )
+    }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.products,
+    }
+}
+
+const mapDispatchToProps = {
+    fetchProductsSuccess
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)

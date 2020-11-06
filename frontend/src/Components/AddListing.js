@@ -1,42 +1,115 @@
 import React from 'react'
+import { Button, Checkbox, Form, Input, TextArea} from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { addListingSuccess } from '../actions/listing'
 
 class AddListing extends React.Component {
+    state = {
+        id: '',
+        name: '',
+        address: '',
+        description: '',
+        start_date: '',
+        end_date: '',
+        image: '',
+        comment: '',
+        error: null
+    }
 
-    handleSubmit = e => {
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
         e.preventDefault()
 
-        const listingId = this.props.match.params.id
-        const {name, address, description, start_date, end_date, image, comment} = e.target
-        const newListing = {name: name.value, address: address.value, description: description.value, start_date: start_date.value, end_date: end_date.value, image: image.value, comment: comment.value, listing_id: listingId}
         const reqObj = {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                id: `${this.props.user.id}`
             },
-            body: JSON.stringify({listing: newListing})
+            body: JSON.stringify({
+                id: this.state.id,
+                name: this.state.name,
+                address: this.state.address,
+                description: this.state.description,
+                start_date: this.state.start_date,
+                end_date: this.state.end_date,
+                image: this.state.image,
+                comment: this.state.comment,
+                user_id: this.props.user.id
+            })
         }
 
         fetch('http://localhost:3000/listings', reqObj)
         .then(resp => resp.json())
-        .then(song => this.props.history.push(`/listings/${listingId}`))
+        .then(data => {
+            if(data.error) {
+                this.setState({
+                    error: data.error
+                })
+            } else {
+                this.props.addListingSuccess(data)
+                this.props.history.push('/profile')
+            }
+        })
     }
 
-    render(){
-        return(
-            <div className='listing-div new-form'>
-                <h2>List your product</h2>
+    render() {
+        return (
             <Form onSubmit={this.handleSubmit}>
-                <input className='form-control' name='name' placeholder='Add product namee' />
-                <input className='form-control' name='address' placeholder='Add pick up address' />
-                <input className='form-control' name='description' placeholder='Add description' />
-                <input className='form-control' name='start date' placeholder='Availability Date' />
-                <input className='form-control' name='end date' placeholder='End date' />
-                <input className='form-control' name='image' placeholder='Add image' />
-                <input className='form-control' name='comment' placeholder='Add comment' />
+                <Form.Group widths='equal'>
+                    <Form.Field
+                        control={Input}
+                        label='Name'
+                        placeholder='Name'
+                        onChange={this.handleChange}
+                        value={this.state.name}
+                    />
+                    <Form.Field
+                        control={Input}
+                        label='Address'
+                        placeholder='Address'
+                        onChange={this.handleChange}
+                        value={this.state.address}
+                    />
+                    <Form.Field
+                        control={Input}
+                        label='Description'
+                        placeholder='Description'
+                        onChange={this.handleChange}
+                        value={this.state.address}
+                    />
+                </Form.Group>
+                <Form.Field
+                    control={TextArea}
+                    label='Comments'
+                    placeholder='Tell us more about your product...'
+                    onChange={this.handleChange}
+                    value={this.state.comment}
+                />
+                <Form.Field
+                    control={Checkbox}
+                    label='I agree to the Terms and Conditions'
+                />
+                <Form.Field control={Button}>Publish</Form.Field>
             </Form>
-            </div>
         )
     }
 }
 
-export default AddListing
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+        listings: state.listings
+    }
+}
+
+const mapDispatchToProps = {
+    addListingSuccess
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddListing)

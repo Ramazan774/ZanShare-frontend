@@ -1,34 +1,42 @@
 import React from 'react'
-import Navbar from './Components/Navbar'
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
-import Home from './Components/Home'
-import Login from './Components/Login'
-import SignUp from './Components/SignUp'
-import Profile from './Components/Profile'
-import ProductsContainer from './Components/ProductsContainer'
-import ProductShowPage from './Components/ProductShowPage'
-import AddListing from './Components/AddListing'
-import EditListing from './Components/EditListing'
+import {  BrowserRouter, Route, Switch } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Profile from './components/Profile'
+import EditProfile from './components/EditProfile'
+import AddListing from './components/AddListing'
+import EditListing from './components/EditListing'
+import ProductShowPage from './components/ProductShowPage'
+import Home from '.components/Home'
+import Login from '.component/Login'
+import SignUp from '.components/SignUp'
+import ProductsContainer from '.components/ProductsContainer'
 
-function App() {
-  return (
-    <BrowserRouter>
+class App extends React.Component {
+  render(){
+    return(
       <div className="App">
-        <Navbar title="ZanShare" description="out app" />
-        <Switch>
-          <Route path="/navbar" component={Navbar} />
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/profile" component={Profile} />
-          <Route exact path="/products" component={ProductsContainer} />
-          <Route path="/products/:id" component={ProductShowPage} />
-          <Route path="/AddListing" component={AddListing} />
-          <Route path="/editlisting/:id" component={EditListing} />
-        </Switch>
+        <header className='App-header'>
+          <div className='navbar'>
+            <Navbar />
+          </div>
+        </header>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/editprofile" component={EditProfile} />
+              <Route exact path="/products" component={ProductsContainer} />
+              <Route path="/products/:id" component={ProductShowPage} />
+              <Route path="/profile/addlisting" component={AddListing} />
+              <Route path="/profile/editlisting/:id" component={EditListing} />
+              <Route path="/profile/editprofile" component={EditProfile} />
+            </Switch>
+        </BrowserRouter>
       </div>
-    </BrowserRouter>
-  );
+    )
+  }
 }
 
 export default App;

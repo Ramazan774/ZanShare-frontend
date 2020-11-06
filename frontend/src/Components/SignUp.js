@@ -1,61 +1,99 @@
 import React from 'react'
-import { Fragment } from 'react'
+import { Button, Form } from 'semantic-ui-react'
+import { createUserSuccess } from '../actions/user'
+import { connect } from 'react-redux'
 
 class SignUp extends React.Component{
+    state = {
+        id:'',
+        first_name: '',
+        last_name: '',
+        email: '',
+        age: '',
+        phone_number: '',
+        password: '',
+        error: null
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const {firstname, lastname, email, age, password}
-        const newUser = {firstname: firstname.value, lastname: lastname.value, email: email.value, phonenumber: phonenumber.value, password: password.value, age: age.value}
         const reqObj = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({user: newUser})
+            body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3000/auth', reqObj)
+        fetch('http://localhost:3000/users', reqObj)
         .then(resp => resp.json())
-        .then(user => this.props.history.push('/'))
-    }
-
-    userForm = () => {
-        return(
-            <Fragment>
-                <form className='new-form' onSubmit={this.handleSubmit}>
-                    <div className='form-row'>
-                        <div className='col-md-6 mb-3'>
-                            <input name='firstname' type='text' className='form-control' placeholder='First Name' required />
-                        </div>
-                        <div className='col-md-6 mb-3'>
-                            <input name='lastname' type='text' className='form-control' placeholder='Last Name' required />
-                        </div>
-                        <div className='col-md-6 mb-3'>
-                            <input name='age' type='number' className='form-control' placeholder='Age' />
-                        </div>
-                        <div className='col-md-6 mb-3'>
-                            <input name='phone' type='number' className='form-control' placeholder='Phone Number' />
-                        </div> 
-                        <div className='col-md-6 mb-3'>
-                            <input name='password' type='password' className='form-control' placeholder='password' />
-                        </div>
-                    </div>
-                    <button className='btn btn-primary' type='submit'>Sign Up</button>
-                </form>
-            </Fragment>
-        )
+        .then(data => {
+            if(data.error){
+                this.setState({
+                    error: data.error
+                })
+            } else {
+                this.props.createUserSuccess(data)
+                this.props.history.push('/')
+            }
+        })
     }
 
     render(){
         return(
-            <div className='signup'>
-                <h1>Sign Up</h1>
-                {this.userForm()}
-            </div>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Field
+                    name='first name'
+                    placeholder='First Name'
+                    onChange={this.handleChange}
+                    value={this.state.first_name}
+                />
+                <Form.Field
+                    name='last name'
+                    placeholder='Last Name'
+                    onChange={this.handleChange}
+                    value={this.state.last_name}
+                />
+                <Form.Field required
+                    name='email'
+                    placeholder='Email'
+                    onChange={this.handleChange}
+                    value={this.state.email}
+                />
+                <Form.Field
+                    name='age'
+                    placeholder='Age'
+                    onChange={this.handleChange}
+                    value={this.state.age}
+                />
+                <Form.Field
+                    name='phone number'
+                    placeholder='(xxx) xxx xxxx'
+                    onChange={this.handleChange}
+                    value={this.state.phone_number}
+                />
+                <Form.Field
+                    name='password'
+                    type='password'
+                    placeholder='Password'
+                    onChange={this.handleChange}
+                    value={this.state.password}
+                />
+                <Button type='submit'>Sign Up</Button>
+            </Form>
         )
     }
 }
 
-export default SignUp
+const mapDispatchToProps = {
+    createUserSuccess
+}
+
+export default connect(null, mapDispatchToProps)(SignUp)

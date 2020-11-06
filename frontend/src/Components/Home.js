@@ -1,7 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-
-// import {currentUser} from '../actions/auth'
+import ProductsContainer from './containers/ProductsContainer'
+import ProductShowPage from '.components/ProductShowPage'
 
 class Home extends React.Component {
 
@@ -19,18 +18,35 @@ class Home extends React.Component {
                 },
             }
 
-            fetch('http://localhost:3000/api/v1/current_user', reqObj)
+            fetch('http://localhost:3000/current_user', reqObj)
             .then(resp => resp.json())
             .then(data => {
-                this.props.currentUser(data.user)
+                if(data.user) {
+                    this.props.currentUser(data.user)
+                    fetch('http://localhost:3000/products')
+                    .then(resp => resp.json())
+                    .then(products => {
+                        let newProducts = products.filter(product => product.user_id === data.user.id)
+                        this.props.fetchProductsSuccess(newProducts)
+                    })
+                }
             })
         }
     }
 
+    renderProducts = () => {
+        let productsList = this.props.notes.filter(products => products.title.toLowerCase().includes(this.props.search.toLowerCase()))
+        return productsList.map((product, index) => (
+            <ProductShowPage key={index} product={product} history={this.props.history} />
+        ))
+    }
+
     render() {
         return (
-            <div>
-                <h5>Your place to rent from hosts</h5>
+            <div className='App'>
+                <br></br>
+                {this.renderProducts()}
+                <br></br>
             </div>
         )
     }
