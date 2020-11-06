@@ -41,7 +41,7 @@ class SignUp extends React.Component{
                 })
             } else {
                 this.props.createUserSuccess(data)
-                this.props.history.push('/')
+                this.props.history.push('/home')
             }
         })
     }
@@ -49,37 +49,39 @@ class SignUp extends React.Component{
     render(){
         return(
             <Form onSubmit={this.handleSubmit}>
-                <Form.Field
-                    name='first name'
+                <Form.Input
+                    name='first_name'
                     placeholder='First Name'
                     onChange={this.handleChange}
                     value={this.state.first_name}
                 />
-                <Form.Field
-                    name='last name'
+                <Form.Input
+                    name='last_name'
                     placeholder='Last Name'
                     onChange={this.handleChange}
                     value={this.state.last_name}
                 />
-                <Form.Field required
+                <Form.Input required
                     name='email'
                     placeholder='Email'
                     onChange={this.handleChange}
                     value={this.state.email}
                 />
-                <Form.Field
+                <Form.Input
+                    type='number' min={18}
                     name='age'
                     placeholder='Age'
                     onChange={this.handleChange}
                     value={this.state.age}
                 />
-                <Form.Field
-                    name='phone number'
+                <Form.Input
+                    type='number'
+                    name='phone_number'
                     placeholder='(xxx) xxx xxxx'
                     onChange={this.handleChange}
                     value={this.state.phone_number}
                 />
-                <Form.Field
+                <Form.Input
                     name='password'
                     type='password'
                     placeholder='Password'

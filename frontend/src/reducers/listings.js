@@ -1,8 +1,8 @@
 const listings = (state=[], action) => {
     switch(action.type) {
-        case 'CURRENT_USER':
-            const listings = action.user.listings
-            return listings
+        // case 'CURRENT_USER':
+        //     const listings = action.user.listings
+        //     return listings
         case 'FETCH_LISTINGS_SUCCESS':
             const listings = [...action.listings]
             return listings

@@ -73,7 +73,7 @@ class EditProfile extends React.Component {
             this.props.history.push('/login')
         })
     }
-}
+
 
     render() {
         return (
@@ -120,17 +120,19 @@ class EditProfile extends React.Component {
             </Form>
         )
     }
+}
+    
 
-    const mapStateToProps = (state) => {
-        return {
-            user: state.user,
-        }
+const mapStateToProps = (state) => {
+    return {
+        user: state.user
     }
+}
 
-    const mapDispatchToProps = {
-        deleteUser,
-        editUserSuccess
-    }
+const mapDispatchToProps = {
+    deleteUser,
+    editUserSuccess
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile)
 

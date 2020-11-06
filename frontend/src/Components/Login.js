@@ -39,7 +39,7 @@ class Login extends React.Component {
             } else {
                 localStorage.setItem('app_token', data.token)
                 this.props.loginSuccess(data.user)
-                this.props.history.push('/')
+                this.props.history.push('/home')
             }
         })
     }
@@ -83,7 +83,7 @@ class Login extends React.Component {
                                 <div style={{ textAlign: "center" }}>
                                     <Button animated='fade'>
                                         <Button.Content visible>Sign up</Button.Content>
-                                        <Button.Content hidden as={Link} to={'/newuser'} style={{ color: 'blue' }}>Sign up</Button.Content>
+                                        <Button.Content hidden as={Link} to={'/signup'} style={{ color: 'blue' }}>Sign up</Button.Content>
                                     </Button>  
                                 </div>
                             </Grid.Column>
