@@ -3,21 +3,18 @@ import { Link } from 'react-router-dom'
 import { Button, Input, Menu } from 'semantic-ui-react'
 import { logoutSuccess } from '../actions/user'
 import { connect } from 'react-redux'
-import { searchProducts } from '../actions/search'
+// import { searchProducts } from '../actions/search'
 
 class Navbar extends React.Component {
     state = {activeItem: 'home'}
 
-    handleItemClick = (e, {name}) => this.setState({activeItem: name })
-
-    handleLogout = () => {
-        this.props.logoutSuccess()
-        localStorage.removeItem('app_token')
+    handleItemClick = (e, {name}) => {
+        this.setState({activeItem: name })
     }
 
-    handleChange = (e) => {
-        e.persist()
-        this.props.searchProducts(e)
+    handleLogout = () => {
+        localStorage.removeItem('app_token')
+        this.props.logoutSuccess()
     }
 
     render () {
@@ -29,30 +26,37 @@ class Navbar extends React.Component {
                     active={activeItem === 'home'}
                     onClick={this.handleItemClick}
                     as={Link}
-                    to='/'
-                />
-                <Menu.Item
-                    name='Share Your Product'
-                    active={activeItem === 'Share Your Product'}
-                    onClick={this.handleItemClick}
-                    as={Link}
-                    to='/addlisting'
+                    to='/home'
                 />
                 <Menu.Menu position='right'>
                     <Menu.Item
-                        name='Sign Up'
-                        active={activeItem === 'Sign Up'}
+                        name='Share Your Product'
+                        active={activeItem === 'Share Your Product'}
                         onClick={this.handleItemClick}
                         as={Link}
-                        to='/signup'
+                        to='/addlisting'
                     />
-                    <Menu.Item
-                        name='Login'
-                        active={activeItem === 'Login'}
-                        onClick={this.handleItemClick}
-                        as={Link}
-                        to='/login'
-                    />
+                    <div className='item'>
+                        {/* {
+                            this.props.user.id
+                        ? */}
+                        <Menu.Item
+                            name='Sign Up'
+                            active={activeItem === 'Sign Up'}
+                            onClick={this.handleItemClick}
+                            as={Link}
+                            to='/signup'
+                        />
+                        {/* :
+                        <Menu.Item
+                            name='Logout'
+                            active={activeItem === 'Logout'}
+                            onClick={this.handleLogout}
+                            as={Link}
+                            to='/login'
+                        /> */}
+                    {/* } */}
+                    </div>                  
                 </Menu.Menu>
             </Menu>
         )
@@ -62,13 +66,11 @@ class Navbar extends React.Component {
 const mapStateToProps = (state) => {
     return {
         user: state.user,
-        search: state.search
     }
 }
 
 const mapDispatchToProps = {
     logoutSuccess,
-    searchProducts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

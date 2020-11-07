@@ -21,7 +21,7 @@ class EditProfile extends React.Component {
         if(!token){
             this.props.history.push('/login')
         } else {
-            fetch(`http://localhost:3000/users/${this.props.user.id}`)
+            fetch(`http://localhost:3001/users/${this.props.user.id}`)
             .then(resp => resp.json())
             .then(data => {
                 this.setState({id: data.id, first_name: data.first_name, last_name: data.last_name, email: data.email, age: data.age, phone_number: data.phone_number, password: data.password})

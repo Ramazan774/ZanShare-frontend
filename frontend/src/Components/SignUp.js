@@ -32,7 +32,7 @@ class SignUp extends React.Component{
             body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3000/users', reqObj)
+        fetch('http://localhost:3001/auth', reqObj)
         .then(resp => resp.json())
         .then(data => {
             if(data.error){

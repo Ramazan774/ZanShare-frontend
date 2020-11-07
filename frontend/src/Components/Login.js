@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import { Grid, Button, Form, Container } from 'semantic-ui-react'
 import { loginSuccess } from '../actions/user'
 import { connect } from 'react-redux'
@@ -29,7 +29,7 @@ class Login extends React.Component {
             body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3000/users/login', reqObj)
+        fetch('http://localhost:3001/auth', reqObj)
         .then(resp => resp.json())
         .then(data => {
             if(data.error) {
@@ -53,8 +53,7 @@ class Login extends React.Component {
                         <Grid.Row centered>
                             <Grid.Column width={7}>
                                 {this.state.error && <h4 style={{ color: 'red' }}>{this.state.error}</h4>}
-                                <Form onSubmit={this.handleSubmit}></Form>
-                                <br></br>
+                                <Form onSubmit={this.handleSubmit}>
                                     <Form.Input
                                         icon='user'
                                         iconPosition='left'
@@ -64,28 +63,22 @@ class Login extends React.Component {
                                         onChange={this.handleInputChange}
                                         value={this.state.email}
                                     />
-                                <Form.Input
-                                    icon='lock'
-                                    iconPosition='left'
-                                    type='password'
-                                    placeholder='Email'
-                                    name={'password'}
-                                    onChange={this.handleInputChange}
-                                    value={this.state.password}
-                                />
-                                <div style={{textAlign: 'center'}}>
-                                    <Button animated='fade'>
-                                        <Button.Content visible><i aria-hidden="true" className="sign in icon"></i></Button.Content>
-                                        <Button.Content hidden style={{ color: 'blue' }}>Login</Button.Content>
+                                    <br></br>
+                                    <Form.Input
+                                        icon='lock'
+                                        iconPosition='left'
+                                        type='password'
+                                        placeholder='Password'
+                                        name={'password'}
+                                        onChange={this.handleInputChange}
+                                        value={this.state.password}
+                                    />
+                                    <br></br>
+                                    <Button>
+                                        <Button.Content>Login</Button.Content>
                                     </Button>
-                                </div>
-                                <br></br> <br></br>
-                                <div style={{ textAlign: "center" }}>
-                                    <Button animated='fade'>
-                                        <Button.Content visible>Sign up</Button.Content>
-                                        <Button.Content hidden as={Link} to={'/signup'} style={{ color: 'blue' }}>Sign up</Button.Content>
-                                    </Button>  
-                                </div>
+                                    <br></br>
+                                </Form>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

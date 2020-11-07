@@ -57,39 +57,14 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
 
-// componentDidMount(){
-    //     const token = localStorage.getItem('app_token')
-
-    //     if(!token){
-    //         this.props.history.push('/login')
-    //     } else {
-
-    //         const reqObj = {
-    //             method: 'GET',
-    //             headers: {
-    //                 'Authorization': `Bearer ${token}`
-    //             },
-    //         }
-
-    //         fetch('http://localhost:3000/current_user', reqObj)
-    //         .then(resp => resp.json())
-    //         .then(data => {
-    //             if(data.user) {
-    //                 this.props.currentUser(data.user)
-    //                 fetch('http://localhost:3000/products')
-    //                 .then(resp => resp.json())
-    //                 .then(products => {
-    //                     let newProducts = products.filter(product => product.user_id === data.user.id)
-    //                     this.props.fetchProductsSuccess(newProducts)
-    //                 })
-    //             }
-    //         })
-    //     }
-    // }
-
-    // renderProducts = () => {
-    //     let productsList = this.props.notes.filter(products => products.title.toLowerCase().includes(this.props.search.toLowerCase()))
-    //     return productsList.map((product, index) => (
-    //         <ProductShowPage key={index} product={product} history={this.props.history} />
-    //     ))
-    // }
+// if (data.user) {
+//   this.props.currentUser(data.user);
+//   fetch("http://localhost:3000/products")
+//     .then((resp) => resp.json())
+//     .then((products) => {
+//       let newProducts = products.filter(
+//         (product) => product.user_id === data.user.id
+//       );
+//       this.props.fetchProductsSuccess(newProducts);
+//     });
+// }
