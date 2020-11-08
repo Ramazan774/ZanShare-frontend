@@ -1,7 +1,7 @@
 import React from 'react'
 // import {Link} from 'react-router-dom'
 import { Grid, Button, Form, Container } from 'semantic-ui-react'
-import { loginSuccess } from '../actions/user'
+import { loginSuccess } from '../actions/auth'
 import { connect } from 'react-redux'
 
 class Login extends React.Component {
@@ -74,9 +74,19 @@ class Login extends React.Component {
                                         value={this.state.password}
                                     />
                                     <br></br>
-                                    <Button>
-                                        <Button.Content>Login</Button.Content>
-                                    </Button>
+                                    <div style={{textAlign: 'center'}}>
+                                        <Button style={{color: 'blue'}}>
+                                            <Button.Content>Login</Button.Content>
+                                        </Button>
+                                    </div>
+                                    <br></br>
+                                    <div style={{textAlign: "center"}}>
+                                        <p>Not a member yet?</p>
+                                        <Button>
+                                            <Button.Content style={{color: 'blue'}}>Sign Up</Button.Content>
+                                        </Button>
+                                    </div>
+                                    
                                     <br></br>
                                 </Form>
                             </Grid.Column>

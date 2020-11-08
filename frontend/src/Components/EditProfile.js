@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteUser } from '../actions/user'
-import { editUserSuccess } from '../actions/user'
-import { Link } from 'react-router-dom'
+import { deleteUser } from '../actions/auth'
+import { editUserSuccess } from '../actions/auth'
+// import { Link } from 'react-router-dom'
 import { Button, Form } from 'semantic-ui-react'
 
 class EditProfile extends React.Component {
@@ -125,7 +125,7 @@ class EditProfile extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        auth: state.auth
     }
 }
 

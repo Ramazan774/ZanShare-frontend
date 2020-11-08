@@ -25,6 +25,7 @@ class App extends React.Component {
               <Route path="/editprofile/:id" component={EditProfile} />
               <Route exact path="/products" component={ProductsContainer} />
               <Route path="/products/:id" component={ProductShowPage} />
+              <Route path="/listing" component={Listing} />
               <Route path="/listings" component={Listings} />
               <Route path="/profile/addlisting" component={AddListing} />
               <Route path="/profile/editlisting/:id" component={EditListing} />

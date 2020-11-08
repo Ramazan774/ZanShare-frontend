@@ -3,7 +3,7 @@ import { Input, Menu } from 'semantic-ui-react'
 import { searchProducts } from '../actions/search'
 // import { logoutSuccess } from '../actions/user'
 import { connect } from 'react-redux'
-import { currentUser } from '../actions/user'
+import { currentUser } from '../actions/auth'
 // import { Link } from 'react-router-dom'
 
 class Home extends React.Component {

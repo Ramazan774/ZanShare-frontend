@@ -1,6 +1,7 @@
 const authReducer = (state={}, action) => {
     switch(action.type) {
         case 'LOGIN_SUCCESS':
+        case 'CURRENT_USER':
             return action.user
         case 'CREATE_USER_SUCCESS':
             return action.user

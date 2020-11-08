@@ -37,7 +37,7 @@ class ProductsContainer extends React.Component {
             <Switch>
                 <Route path='/products/:id' render={(route) => {
                     const id = route.match.params.id
-                    const product = this.state.products.find(product => product.id == id)
+                    const product = this.state.products.find(product => product.id === id)
                     return <ProductShowPage product={product} />
                 }} />
             </Switch>

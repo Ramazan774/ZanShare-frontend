@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Input, Menu } from 'semantic-ui-react'
-import { logoutSuccess } from '../actions/user'
+import { Menu } from 'semantic-ui-react'
+import { logoutSuccess } from '../actions/auth'
 import { connect } from 'react-redux'
 // import { searchProducts } from '../actions/search'
 
@@ -65,12 +65,12 @@ class Navbar extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
+        auth: state.auth
     }
 }
 
 const mapDispatchToProps = {
-    logoutSuccess,
+    logoutSuccess
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
