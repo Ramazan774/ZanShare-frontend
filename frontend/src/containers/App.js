@@ -15,25 +15,24 @@ import ProductsContainer from '../components/ProductsContainer'
 class App extends React.Component {
   render(){
     return(
-      <div className="App">
-          <BrowserRouter>
-            <Navbar />
-            <Switch>
-              <Route exact path="/home" component={Home} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/editprofile/:id" component={EditProfile} />
-              <Route exact path="/products" component={ProductsContainer} />
-              <Route path="/products/:id" component={ProductShowPage} />
-              <Route path="/listing" component={Listing} />
-              <Route path="/listings" component={Listings} />
-              <Route path="/profile/addlisting" component={AddListing} />
-              <Route path="/profile/editlisting/:id" component={EditListing} />
-              <Route path="/profile/editprofile" component={EditProfile} />
-              <Route exact path="/" component={Login} />
-            </Switch>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <Switch>
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/editprofile/:id" component={EditProfile} />
+            <Route exact path="/products" component={ProductsContainer} />
+            <Route exact path="/products/:id" component={ProductShowPage} />
+            <Route exact path="/listing" component={Listing} />
+            <Route exact path="/listings" component={Listings} />
+            <Route exact path="/addlisting" component={AddListing} />
+            <Route exact path="/editlisting/:id" component={EditListing} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     )
   }
 }

@@ -3,7 +3,7 @@ import { Input, Menu } from 'semantic-ui-react'
 import { searchProducts } from '../actions/search'
 // import { logoutSuccess } from '../actions/user'
 import { connect } from 'react-redux'
-import { currentUser } from '../actions/auth'
+import { currentUser } from '../actions/user'
 // import { Link } from 'react-router-dom'
 
 class Home extends React.Component {
@@ -21,7 +21,7 @@ class Home extends React.Component {
                 },
             }
 
-            fetch('http://localhost:3001/current_user', reqObj)
+            fetch('http://localhost:3000/current_user', reqObj)
             .then(resp => resp.json())
             .then(data => {
                 this.props.currentUser(data.user)

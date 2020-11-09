@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
-import { createUserSuccess } from '../actions/auth'
+import { createUserSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 
 class SignUp extends React.Component{
@@ -22,6 +22,7 @@ class SignUp extends React.Component{
     }
 
     handleSubmit = (e) => {
+        // debugger
         e.preventDefault()
 
         const reqObj = {
@@ -32,16 +33,17 @@ class SignUp extends React.Component{
             body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3001/auth', reqObj)
+        fetch('http://localhost:3000/users', reqObj)
         .then(resp => resp.json())
         .then(data => {
+            console.log(data)
             if(data.error){
                 this.setState({
                     error: data.error
                 })
             } else {
                 this.props.createUserSuccess(data)
-                this.props.history.push('/home')
+                this.props.history.push(`/home`)
             }
         })
     }

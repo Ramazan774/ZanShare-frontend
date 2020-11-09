@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import products from './products'
-import authReducer from './auth'
+import user from './user'
 import search from './search'
 import listings from './listings'
 
 export default combineReducers({
-    auth: authReducer,
+    user,
     products,
     listings,
     search

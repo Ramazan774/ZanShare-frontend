@@ -1,7 +1,7 @@
 import React from 'react'
 // import {Link} from 'react-router-dom'
 import { Grid, Button, Form, Container } from 'semantic-ui-react'
-import { loginSuccess } from '../actions/auth'
+import { loginSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 
 class Login extends React.Component {
@@ -29,7 +29,7 @@ class Login extends React.Component {
             body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3001/auth', reqObj)
+        fetch('http://localhost:3000/users/login', reqObj)
         .then(resp => resp.json())
         .then(data => {
             if(data.error) {

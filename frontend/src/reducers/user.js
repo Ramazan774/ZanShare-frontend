@@ -1,7 +1,6 @@
-const authReducer = (state={}, action) => {
+const user = (state={}, action) => {
     switch(action.type) {
         case 'LOGIN_SUCCESS':
-        case 'CURRENT_USER':
             return action.user
         case 'CREATE_USER_SUCCESS':
             return action.user
@@ -16,4 +15,4 @@ const authReducer = (state={}, action) => {
     }
 }
 
-export default authReducer
+export default user

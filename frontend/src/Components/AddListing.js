@@ -43,7 +43,7 @@ class AddListing extends React.Component {
             })
         }
 
-        fetch('http://localhost:3001/listings', reqObj)
+        fetch('http://localhost:3000/listings', reqObj)
         .then(resp => resp.json())
         .then(data => {
             if(data.error) {
