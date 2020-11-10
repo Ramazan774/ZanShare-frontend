@@ -17,6 +17,32 @@ class Navbar extends React.Component {
         this.props.logoutSuccess()
     }
 
+    conditionallyRenderLogout = () => {
+        const { activeItem } = this.state;
+        if(this.props.user.id){
+            return (
+              <Menu.Menu position="right">
+                <Menu.Item
+                  name="Share Your Product"
+                  active={activeItem === "Share Your Product"}
+                  onClick={this.handleItemClick}
+                  as={Link}
+                  to="/addlisting"
+                />
+                <div className="item">
+                  <Menu.Item
+                    name="Logout"
+                    active={activeItem === "Logout"}
+                    onClick={this.handleLogout}
+                    as={Link}
+                    to="/login"
+                  />
+                </div>
+              </Menu.Menu>
+            );
+        }
+    }
+
     render () {
         const { activeItem } = this.state
         return (
@@ -28,36 +54,7 @@ class Navbar extends React.Component {
                     as={Link}
                     to='/home'
                 />
-                <Menu.Menu position='right'>
-                    <Menu.Item
-                        name='Share Your Product'
-                        active={activeItem === 'Share Your Product'}
-                        onClick={this.handleItemClick}
-                        as={Link}
-                        to='/addlisting'
-                    />
-                    <div className='item'>
-                        {/* {
-                            this.props.user.id
-                        ? */}
-                        <Menu.Item
-                            name='Sign Up'
-                            active={activeItem === 'Sign Up'}
-                            onClick={this.handleItemClick}
-                            as={Link}
-                            to='/signup'
-                        />
-                        {/* :
-                        <Menu.Item
-                            name='Logout'
-                            active={activeItem === 'Logout'}
-                            onClick={this.handleLogout}
-                            as={Link}
-                            to='/login'
-                        /> */}
-                    {/* } */}
-                    </div>                  
-                </Menu.Menu>
+                {this.conditionallyRenderLogout()}
             </Menu>
         )
     }

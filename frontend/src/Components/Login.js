@@ -1,5 +1,5 @@
 import React from 'react'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { Grid, Button, Form, Container } from 'semantic-ui-react'
 import { loginSuccess } from '../actions/user'
 import { connect } from 'react-redux'
@@ -79,16 +79,13 @@ class Login extends React.Component {
                                             <Button.Content>Login</Button.Content>
                                         </Button>
                                     </div>
-                                    <br></br>
-                                    <div style={{textAlign: "center"}}>
-                                        <p>Not a member yet?</p>
-                                        <Button>
-                                            <Button.Content style={{color: 'blue'}}>Sign Up</Button.Content>
-                                        </Button>
-                                    </div>
-                                    
-                                    <br></br>
                                 </Form>
+                                    <br></br>
+                                <div style={{textAlign: "center"}}>
+                                    <p>Not a member yet?</p>
+                                    <Link to={'/signup'}><Button style={{color: 'blue'}}>Sign Up</Button></Link>
+                                </div> 
+                                <br></br>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

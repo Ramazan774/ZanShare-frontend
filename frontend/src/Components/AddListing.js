@@ -3,6 +3,7 @@ import { Button, Checkbox, Form, Input, TextArea} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { addListingSuccess } from '../actions/listings'
 
+
 class AddListing extends React.Component {
     state = {
         id: '',
@@ -59,43 +60,45 @@ class AddListing extends React.Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <Form.Group widths='equal'>
+            <div>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group widths='equal'>
+                        <Form.Field
+                            control={Input}
+                            label='Name'
+                            placeholder='Name'
+                            onChange={this.handleChange}
+                            value={this.state.name}
+                        />
+                        <Form.Field
+                            control={Input}
+                            label='Address'
+                            placeholder='Address'
+                            onChange={this.handleChange}
+                            value={this.state.address}
+                        />
+                        <Form.Field
+                            control={Input}
+                            label='Description'
+                            placeholder='Description'
+                            onChange={this.handleChange}
+                            value={this.state.address}
+                        />
+                    </Form.Group>
                     <Form.Field
-                        control={Input}
-                        label='Name'
-                        placeholder='Name'
+                        control={TextArea}
+                        label='Comments'
+                        placeholder='Tell us more about your product...'
                         onChange={this.handleChange}
-                        value={this.state.name}
+                        value={this.state.comment}
                     />
                     <Form.Field
-                        control={Input}
-                        label='Address'
-                        placeholder='Address'
-                        onChange={this.handleChange}
-                        value={this.state.address}
+                        control={Checkbox}
+                        label='I agree to the Terms and Conditions'
                     />
-                    <Form.Field
-                        control={Input}
-                        label='Description'
-                        placeholder='Description'
-                        onChange={this.handleChange}
-                        value={this.state.address}
-                    />
-                </Form.Group>
-                <Form.Field
-                    control={TextArea}
-                    label='Comments'
-                    placeholder='Tell us more about your product...'
-                    onChange={this.handleChange}
-                    value={this.state.comment}
-                />
-                <Form.Field
-                    control={Checkbox}
-                    label='I agree to the Terms and Conditions'
-                />
-                <Form.Field control={Button}>Publish</Form.Field>
-            </Form>
+                    <Form.Field control={Button}>Publish</Form.Field>
+                </Form>
+            </div>
         )
     }
 }

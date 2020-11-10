@@ -2,10 +2,11 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import ProductShowPage from './ProductShowPage'
 import { connect } from 'react-redux'
+import Navbar from './Navbar'
 import { fetchProductsSuccess } from '../actions/products'
 
 class ProductsContainer extends React.Component {
-    state= {}
+    state = {}
     constructor(props) {
         super(props)
     }
@@ -19,6 +20,7 @@ class ProductsContainer extends React.Component {
     }
 
     renderProducts = () => {
+        debugger
         const allProducts = this.props.products.map(p => {
             <ProductShowPage
                 key = {p.id}
@@ -56,15 +58,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
-
-// if (data.user) {
-//   this.props.currentUser(data.user);
-//   fetch("http://localhost:3000/products")
-//     .then((resp) => resp.json())
-//     .then((products) => {
-//       let newProducts = products.filter(
-//         (product) => product.user_id === data.user.id
-//       );
-//       this.props.fetchProductsSuccess(newProducts);
-//     });
-// }

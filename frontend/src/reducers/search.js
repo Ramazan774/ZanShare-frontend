@@ -3,7 +3,7 @@ const search = (state='', action) => {
         case 'SEARCH_LISTINGS':
             return action.search.target.value
         case 'SEARCH_PRODUCTS':
-            return action.search.target.value
+            return action.search.target.search.value;
         default:
             return state
     }

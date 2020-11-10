@@ -1,12 +1,15 @@
 import React from 'react'
-import { Input, Menu } from 'semantic-ui-react'
+import { Form, Input, Menu, Button } from 'semantic-ui-react'
 import { searchProducts } from '../actions/search'
 // import { logoutSuccess } from '../actions/user'
 import { connect } from 'react-redux'
 import { currentUser } from '../actions/user'
-// import { Link } from 'react-router-dom'
+// import Navbar from './Navbar.js'
+import ProductsContainer from './ProductsContainer'
+import { Link } from 'react-router-dom'
 
 class Home extends React.Component {
+
     componentDidMount(){
         const token = localStorage.getItem('app_token')
 
@@ -21,7 +24,7 @@ class Home extends React.Component {
                 },
             }
 
-            fetch('http://localhost:3000/current_user', reqObj)
+            fetch('http://localhost:3000/current_session', reqObj)
             .then(resp => resp.json())
             .then(data => {
                 this.props.currentUser(data.user)
@@ -29,24 +32,33 @@ class Home extends React.Component {
         }
     }
 
-    handleChange = (e) => {
-        e.persist();
-        this.props.searchProducts(e);
-    };
+    handleSubmit = (e) => {
+        e.preventDefault()
+        this.props.searchProducts(e)
+        this.props.history.push('/products')
+    }
+
+    renderProducts = () => {
+        debugger
+        let productsList = this.props.products.filter(products => products.name.toLowerCase().includes(this.props.search.toLowerCase()) || products.description.toLowerCase().includes(this.props.search.toLowerCase()))
+    }
 
     render() {
         return (
-        <Menu>
-            <Menu.Menu>
-            <Input
-                onChange={this.handleChange}
-                icon="search"
-                placeholder="Search..."
-            />
-            </Menu.Menu>
-        </Menu>
-        );
-    }
+          <div>
+            <Menu>
+              <Menu.Menu>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Input
+                    name="search"
+                    placeholder="Search..."
+                    icon={ <Button icon="search" type="submit" /> }
+                  />
+                </Form>
+              </Menu.Menu>
+            </Menu>
+          </div>
+        );}
     }
 
     const mapStateToProps = (state) => {

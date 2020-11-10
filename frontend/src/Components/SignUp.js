@@ -22,7 +22,6 @@ class SignUp extends React.Component{
     }
 
     handleSubmit = (e) => {
-        // debugger
         e.preventDefault()
 
         const reqObj = {
@@ -35,17 +34,11 @@ class SignUp extends React.Component{
 
         fetch('http://localhost:3000/users', reqObj)
         .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-            if(data.error){
-                this.setState({
-                    error: data.error
-                })
-            } else {
-                this.props.createUserSuccess(data)
-                this.props.history.push(`/home`)
+        .then(newUser => {
+                this.props.createUserSuccess(newUser)
+                this.props.history.push('/home')
             }
-        })
+        )
     }
 
     render(){
