@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import ProductShowPage from './ProductShowPage'
+import ProductCard from './ProductCard'
 import { connect } from 'react-redux'
 import Navbar from './Navbar'
 import { fetchProductsSuccess } from '../actions/products'
@@ -20,9 +20,9 @@ class ProductsContainer extends React.Component {
     }
 
     renderProducts = () => {
-        debugger
+        
         const allProducts = this.props.products.map(p => {
-            <ProductShowPage
+            return <ProductCard
                 key = {p.id}
                 product = {p}
             />
@@ -36,20 +36,23 @@ class ProductsContainer extends React.Component {
 
     render(){
         return (
+            <div>
+                {this.renderProducts()}
             <Switch>
                 <Route path='/products/:id' render={(route) => {
                     const id = route.match.params.id
                     const product = this.state.products.find(product => product.id === id)
-                    return <ProductShowPage product={product} />
+                    return <ProductCard product={product} />
                 }} />
             </Switch>
+            </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products,
+        products: state.products
     }
 }
 

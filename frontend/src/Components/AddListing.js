@@ -66,6 +66,7 @@ class AddListing extends React.Component {
                         <Form.Field
                             control={Input}
                             label='Name'
+                            name="name"
                             placeholder='Name'
                             onChange={this.handleChange}
                             value={this.state.name}
@@ -73,6 +74,7 @@ class AddListing extends React.Component {
                         <Form.Field
                             control={Input}
                             label='Address'
+                            name="address"
                             placeholder='Address'
                             onChange={this.handleChange}
                             value={this.state.address}
@@ -80,14 +82,16 @@ class AddListing extends React.Component {
                         <Form.Field
                             control={Input}
                             label='Description'
+                            name="description"
                             placeholder='Description'
                             onChange={this.handleChange}
-                            value={this.state.address}
+                            value={this.state.description}
                         />
                     </Form.Group>
                     <Form.Field
                         control={TextArea}
                         label='Comments'
+                        name="comment"
                         placeholder='Tell us more about your product...'
                         onChange={this.handleChange}
                         value={this.state.comment}

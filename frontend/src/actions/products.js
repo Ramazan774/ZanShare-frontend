@@ -4,3 +4,10 @@ export const fetchProductsSuccess = (products) => {
         products: products
     }
 }
+
+export const selectProduct = (id) => {
+    return {
+        type: "SELECT_PRODUCT",
+        id: id
+    }
+}

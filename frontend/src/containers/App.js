@@ -9,7 +9,7 @@ import Listing from '../components/Listing'
 import Listings from '../components/Listings'
 import AddListing from '../components/AddListing'
 import EditListing from '../components/EditListing'
-import ProductShowPage from '../components/ProductShowPage'
+import ProductShowCard from '../components/ProductShowCard'
 import ProductsContainer from '../components/ProductsContainer'
 
 class App extends React.Component {
@@ -25,7 +25,7 @@ class App extends React.Component {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/editprofile/:id" component={EditProfile} />
             <Route exact path="/products" component={ProductsContainer} />
-            <Route exact path="/products/:id" component={ProductShowPage} />
+            <Route exact path="/products/:id" component={ProductShowCard} />
             <Route exact path="/listing" component={Listing} />
             <Route exact path="/listings" component={Listings} />
             <Route exact path="/addlisting" component={AddListing} />
