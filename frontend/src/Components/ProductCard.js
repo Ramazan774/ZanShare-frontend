@@ -17,6 +17,7 @@ const ProductCard = props => {
                 <img src={props.product.image_url} />
                 <br></br>
                 <Link to={link}><Button>Details</Button></Link>
+                <br></br>
             </div>
         </div>
     )

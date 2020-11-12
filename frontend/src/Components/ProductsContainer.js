@@ -14,7 +14,7 @@ class ProductsContainer extends React.Component {
     renderProducts = () => {
         
         const productsList = this.props.products.filter(products => products.name.toLowerCase().includes(this.props.search.toLowerCase())|| products.description.toLowerCase().includes(this.props.search.toLowerCase()))
-        console.log(productsList, 'Hi')
+        // console.log(productsList, 'Hi')
         const allProducts = productsList.map(p => {
             return <ProductCard
                 key = {p.id}

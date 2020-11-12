@@ -52,10 +52,10 @@ class Home extends React.Component {
           <div>
             <Menu>
               <Menu.Menu>
-                <h4 style={{fontStyle: 'bold', fontSize: '', paddingTop: '200px'}}>Your place to rent from trusted hosts</h4>
+                <h4>ZanShare is the platform for communities to share their equipments and gadgets with those in need. There is no charge for putting your listings or to rent from someone through this platform. Everything is based on our trust to each other.</h4>
                 <Form size='large' onSubmit={this.handleSubmit}>
                   <Form.Input
-                    style={{marginTop: '300px', marginLeft: '10px', width: '500px'}}
+                    style={{marginTop: '300px', marginRight: '500px', width: '500px'}}
                     name="search"
                     placeholder="Search for products..."
                     icon={ <Button icon="search" type="submit" /> }
