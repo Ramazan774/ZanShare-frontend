@@ -7,8 +7,8 @@ import Home from '../components/Home'
 import EditProfile from '../components/EditProfile'
 import Listing from '../components/Listing'
 import Listings from '../components/Listings'
-import AddListing from '../components/AddListing'
-import EditListing from '../components/EditListing'
+import AddProduct from '../components/AddProduct'
+import EditProduct from '../components/EditProduct'
 import ProductShowCard from '../components/ProductShowCard'
 import ProductsContainer from '../components/ProductsContainer'
 
@@ -28,8 +28,8 @@ class App extends React.Component {
             <Route exact path="/products/:id" component={ProductShowCard} />
             <Route exact path="/listing" component={Listing} />
             <Route exact path="/listings" component={Listings} />
-            <Route exact path="/addlisting" component={AddListing} />
-            <Route exact path="/editlisting/:id" component={EditListing} />
+            <Route exact path="/addproduct" component={AddProduct} />
+            <Route exact path="/editproduct/:id" component={EditProduct} />
           </Switch>
         </div>
       </BrowserRouter>

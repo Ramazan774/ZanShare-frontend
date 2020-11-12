@@ -1,19 +1,18 @@
 import React from 'react'
-import { Button, Checkbox, Form, Input, TextArea} from 'semantic-ui-react'
+import { Button, Checkbox, Form, Input, TextArea, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { addListingSuccess } from '../actions/listings'
+import { addProductSuccess } from '../actions/products'
 
-
-class AddListing extends React.Component {
+class AddProduct extends React.Component {
     state = {
-        id: '',
         name: '',
         address: '',
         description: '',
         start_date: '',
         end_date: '',
-        image: '',
+        image_url: '',
         comment: '',
+        user_id: this.props.user.id,
         error: null
     }
 
@@ -31,29 +30,20 @@ class AddListing extends React.Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                id: this.state.id,
-                name: this.state.name,
-                address: this.state.address,
-                description: this.state.description,
-                start_date: this.state.start_date,
-                end_date: this.state.end_date,
-                image: this.state.image,
-                comment: this.state.comment,
-                user_id: this.props.user.id
-            })
+            body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3000/listings', reqObj)
+        fetch('http://localhost:3000/products', reqObj)
         .then(resp => resp.json())
         .then(data => {
+            debugger
             if(data.error) {
                 this.setState({
                     error: data.error
                 })
             } else {
-                this.props.addListingSuccess(data)
-                this.props.history.push('/profile')
+                this.props.addProductSuccess(data)
+                this.props.history.push('/products')
             }
         })
     }
@@ -87,7 +77,30 @@ class AddListing extends React.Component {
                             onChange={this.handleChange}
                             value={this.state.description}
                         />
+                        <Form.Field
+                            control={Input}
+                            label='Start Date'
+                            name="start_date"
+                            placeholder='MM/DD/YYYY'
+                            onChange={this.handleChange}
+                            value={this.state.start_date}
+                        />
+                        <Form.Field
+                            control={Input}
+                            label='End Date'
+                            name="end_date"
+                            placeholder='MM/DD/YYYY'
+                            onChange={this.handleChange}
+                            value={this.state.end_date}
+                        />
                     </Form.Group>
+                    <Form.Field
+                        label='Image'
+                        name='image_url'
+                        value={this.state.image_url}
+                        control={Input}
+                        onChange={this.handleChange}
+                    />
                     <Form.Field
                         control={TextArea}
                         label='Comments'
@@ -110,12 +123,12 @@ class AddListing extends React.Component {
 const mapStateToProps = (state) => {
     return {
         user: state.user,
-        listings: state.listings
+        products: state.products
     }
 }
 
 const mapDispatchToProps = {
-    addListingSuccess
+    addProductSuccess
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddListing)
+export default connect(mapStateToProps, mapDispatchToProps)(AddProduct)

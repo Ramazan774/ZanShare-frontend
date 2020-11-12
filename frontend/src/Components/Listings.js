@@ -1,15 +1,11 @@
 import React from 'react'
-// import { Button, Form } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import Listing from './Listing'
-// import { Link } from 'react-router-dom'
+import ProductCard from './ProductCard'
+import { Button } from 'semantic-ui-react'
+import {checkoutSuccess} from '../actions/listings'
+import { Link } from 'react-router-dom'
 
 class Listings extends React.Component {
-
-    state = {
-        listings: [],
-        id: ''
-    }
 
     noListings = () => {
         return(
@@ -19,23 +15,17 @@ class Listings extends React.Component {
 
     renderListings = () => {
         return this.props.listings.map((listing, index) => {
-            return <Listing key={index} listing={listing} history={this.props.history} />
+            return <ProductCard product={listing}/>
         })
     }
     
-    componentDidMount(){
-        fetch('http://localhost:3000/listings')
-        .then(resp => resp.json())
-        .then(listings => {
-            this.props.fetchListingsSuccess(listings)
-        })
-    }
 
     render(){
         return(
             <div>
                 <h4>Listings</h4>
                 {this.renderListings()}
+                <Link to='/home'><Button onClick={this.props.checkoutSuccess}>Checkout</Button></Link>
             </div>
         )
     }
@@ -48,4 +38,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Listings)
+const mapDispatchToProps = {
+    checkoutSuccess
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Listings)

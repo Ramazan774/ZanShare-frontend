@@ -11,17 +11,19 @@ class ProductsContainer extends React.Component {
         super(props)
     }
 
-    componentDidMount(){
-        fetch('http://localhost:3000/products')
-        .then(resp => resp.json())
-        .then(products => {
-            this.props.fetchProductsSuccess(products)
-        })
-    }
+    // componentDidMount(){
+    //     fetch('http://localhost:3000/products')
+    //     .then(resp => resp.json())
+    //     .then(products => {
+    //         this.props.fetchProductsSuccess(products)
+    //     })
+    // }
 
     renderProducts = () => {
         
-        const allProducts = this.props.products.map(p => {
+        const productsList = this.props.products.filter(products => products.name.toLowerCase().includes(this.props.search.toLowerCase())|| products.description.toLowerCase().includes(this.props.search.toLowerCase()))
+        console.log(productsList, 'Hi')
+        const allProducts = productsList.map(p => {
             return <ProductCard
                 key = {p.id}
                 product = {p}
@@ -40,9 +42,7 @@ class ProductsContainer extends React.Component {
                 {this.renderProducts()}
             <Switch>
                 <Route path='/products/:id' render={(route) => {
-                    const id = route.match.params.id
-                    const product = this.state.products.find(product => product.id === id)
-                    return <ProductCard product={product} />
+                    // return this.renderProducts()
                 }} />
             </Switch>
             </div>
@@ -52,7 +52,8 @@ class ProductsContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products
+        products: state.products,
+        search: state.search
     }
 }
 

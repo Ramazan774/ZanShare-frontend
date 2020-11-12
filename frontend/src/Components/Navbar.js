@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 import { logoutSuccess } from '../actions/user'
 import { connect } from 'react-redux'
-// import { searchProducts } from '../actions/search'
 
 class Navbar extends React.Component {
     state = {activeItem: 'home'}
@@ -27,7 +26,14 @@ class Navbar extends React.Component {
                   active={activeItem === "Share Your Product"}
                   onClick={this.handleItemClick}
                   as={Link}
-                  to="/addlisting"
+                  to="/addproduct"
+                />
+                <Menu.Item
+                  name="Checkout"
+                  active={activeItem === "Checkout"}
+                  onClick={this.handleItemClick}
+                  as={Link}
+                  to="/listings"
                 />
                 <div className="item">
                   <Menu.Item
@@ -48,7 +54,7 @@ class Navbar extends React.Component {
         return (
             <Menu>
                 <Menu.Item
-                    name='home'
+                    name='ZanShare'
                     active={activeItem === 'home'}
                     onClick={this.handleItemClick}
                     as={Link}

@@ -1,8 +1,8 @@
 import React from 'react'
-import Listings from './Listings'
+import ProductsContainer from './ProductsContainer'
 import DeleteConfirmation from './DeleteConfirmation'
 
-class EditListings extends React.Component {
+class EditProduct extends React.Component {
     constructor(){
         super()
 
@@ -19,15 +19,15 @@ class EditListings extends React.Component {
         return this.state.deleteView ? (
             <DeleteConfirmation
                 handleCancelClick={this.handleToggle}
-                listing={this.props.listing}
+                product={this.props.product}
             />
         ) : (
-            <Listings
-                listing={this.props.listing}
+            <ProductsContainer
+                product={this.props.product}
                 handleDelete={this.handleToggle}
             />
         )
     }
 }
 
-export default EditListings
+export default EditProduct

@@ -1,20 +1,13 @@
-export const fetchListingsSuccess = (listings) => {
-    return {
-        type: 'FETCH_LISTINGS_SUCCESS',
-        listings: listings
-    }
-}
-
 export const addListingSuccess = (listings) => {
     return {
-        type: 'ADD_LISTING_SUCCESS',
+        type: "ADD_LISTING_SUCCESS",
         listings: listings
     }
 }
 
-export const deleteListingSuccess = (listings) => {
+export const checkoutSuccess = () => {
     return {
-        type: 'DELETE_LISTING_SUCCESS',
-        listings: listings
+        type: "CHECKOUT_SUCCESS",
+        
     }
 }

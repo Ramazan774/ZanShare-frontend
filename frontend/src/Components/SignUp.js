@@ -76,7 +76,7 @@ class SignUp extends React.Component{
                     onChange={this.handleChange}
                     value={this.state.phone_number}
                 />
-                <Form.Input
+                <Form.Input required
                     name='password'
                     type='password'
                     placeholder='Password'

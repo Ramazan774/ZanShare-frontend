@@ -11,3 +11,17 @@ export const selectProduct = (id) => {
         id: id
     }
 }
+
+export const addProductSuccess = (products) => {
+    return {
+        type: 'ADD_PRODUCT_SUCCESS',
+        products: products
+    }
+}
+
+export const deleteProductSuccess = (products) => {
+    return {
+        type: 'DELETE_PRODUCT_SUCCESS',
+        products: products
+    }
+}
