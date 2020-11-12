@@ -23,8 +23,9 @@ class Listings extends React.Component {
     render(){
         return(
             <div>
-                <h4>Listings</h4>
+                <h2>Listings</h2>
                 {this.renderListings()}
+                <br></br>
                 <Link to='/home'><Button onClick={this.props.checkoutSuccess}>Checkout</Button></Link>
             </div>
         )

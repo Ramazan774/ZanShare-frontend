@@ -5,7 +5,6 @@ import Login from '../components/Login'
 import SignUp from '../components/SignUp'
 import Home from '../components/Home'
 import EditProfile from '../components/EditProfile'
-import Listing from '../components/Listing'
 import Listings from '../components/Listings'
 import AddProduct from '../components/AddProduct'
 import EditProduct from '../components/EditProduct'
@@ -26,7 +25,6 @@ class App extends React.Component {
             <Route exact path="/editprofile/:id" component={EditProfile} />
             <Route exact path="/products" component={ProductsContainer} />
             <Route exact path="/products/:id" component={ProductShowCard} />
-            <Route exact path="/listing" component={Listing} />
             <Route exact path="/listings" component={Listings} />
             <Route exact path="/addproduct" component={AddProduct} />
             <Route exact path="/editproduct/:id" component={EditProduct} />

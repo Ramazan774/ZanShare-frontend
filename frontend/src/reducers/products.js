@@ -10,6 +10,8 @@ const products = (state = [], action) => {
         case 'DELETE_PRODUCT_SUCCESS':
             const newProducts = state.filter(obj => obj.id !== action.id)
                 return newProducts
+            case 'EDIT_PRODUCT_SUCCESS':
+                return [...action.products]
         default:
             return state;
     }

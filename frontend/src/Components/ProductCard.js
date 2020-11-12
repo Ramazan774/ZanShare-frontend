@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { selectProduct} from '../actions/products'
 
@@ -14,8 +15,9 @@ const ProductCard = props => {
             <br></br>
             <div className='ui small image'>
                 <img src={props.product.image_url} />
+                <br></br>
+                <Link to={link}><Button>Details</Button></Link>
             </div>
-            <Link to={link}><button>Details</button></Link>
         </div>
     )
 }

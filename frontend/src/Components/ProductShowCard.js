@@ -18,18 +18,18 @@ class ProductShowCard extends React.Component {
         const button = this.props.user.id === this.props.product[0].user_id ? 
             <Link to="/editproduct"><Button onClick={() => this.props.selectProduct(this.props.product[0].id)}>Edit</Button></Link>
             :
-            <Link to='/products'><Button onClick={() => this.props.addListingSuccess(this.props.product[0])}>Rent</Button></Link>
+            <Link to='/listings'><Button onClick={() => this.props.addListingSuccess(this.props.product[0])}>Rent</Button></Link>
 
         return(
             <div>
-                <h4>{this.props.product[0].name}</h4>
-                <img src={this.props.product[0].image} alt={this.props.product[0].name} />
-                <h5>{this.props.product[0].start_date}</h5>
-                <p>{this.props.product[0].address}</p>
-                <p>{this.props.product[0].description}</p>
-                <Link to={link}><button>Back</button></Link>
+                <h3>{this.props.product[0].name}</h3>
+                <img src={this.props.product[0].image_url} alt={this.props.product[0].name} height={300} width={300}/>
+                <h4>Available Date: {this.props.product[0].start_time}</h4>
+                <h4>End Date: {this.props.product[0].end_time}</h4>
+                <h5>Address: {this.props.product[0].address}</h5>
+                <p>Description: {this.props.product[0].description}</p>
+                <Link to={link}><Button>Back</Button></Link>
                 {button}
-                {/* <Link to={'/products'}><button>Book</button></Link> */}
             </div>
             )
         }

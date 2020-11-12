@@ -36,42 +36,28 @@ class Home extends React.Component {
         }
     }
 
-    
-    
-
     handleSubmit = (e) => {
         e.preventDefault()
         
         this.props.searchProducts(e)
         if (this.props.search === "") {
-          return;
+            return;
         } else {
             this.props.history.push('/products')
         }
     }
-
-    // renderProducts = () => {
-        
-    //     if (this.props.search === ""){
-    //         debugger
-    //         return 
-    //     } else {
-    //         let productsList = this.props.products.filter(products => products.name.toLowerCase().includes(this.props.search.toLowerCase()) || products.description.toLowerCase().includes(this.props.search.toLowerCase()))
-    //     }
-        
-    // }
 
     render() {
         return (
           <div>
             <Menu>
               <Menu.Menu>
-                <p style={{textAlign: 'center'}}>Your place to rent from trusted hosts</p>
-                <Form onSubmit={this.handleSubmit}>
+                <h4 style={{fontStyle: 'bold', fontSize: '', paddingTop: '200px'}}>Your place to rent from trusted hosts</h4>
+                <Form size='large' onSubmit={this.handleSubmit}>
                   <Form.Input
-                    style={{marginTop: '300px', width: '500px'}}
+                    style={{marginTop: '300px', marginLeft: '10px', width: '500px'}}
                     name="search"
-                    placeholder="Search..."
+                    placeholder="Search for products..."
                     icon={ <Button icon="search" type="submit" /> }
                   />
                 </Form>

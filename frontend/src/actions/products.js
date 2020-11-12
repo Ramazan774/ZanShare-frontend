@@ -25,3 +25,10 @@ export const deleteProductSuccess = (products) => {
         products: products
     }
 }
+
+export const editProductSuccess = (products) => {
+    return {
+        type: 'EDIT_PRODUCT_SUCCESS',
+        products: products
+    }
+}

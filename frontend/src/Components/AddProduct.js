@@ -8,8 +8,8 @@ class AddProduct extends React.Component {
         name: '',
         address: '',
         description: '',
-        start_date: '',
-        end_date: '',
+        start_time: '',
+        end_time: '',
         image_url: '',
         comment: '',
         user_id: this.props.user.id,
@@ -80,18 +80,18 @@ class AddProduct extends React.Component {
                         <Form.Field
                             control={Input}
                             label='Start Date'
-                            name="start_date"
+                            name="start_time"
                             placeholder='MM/DD/YYYY'
                             onChange={this.handleChange}
-                            value={this.state.start_date}
+                            value={this.state.start_time}
                         />
                         <Form.Field
                             control={Input}
                             label='End Date'
-                            name="end_date"
+                            name="end_time"
                             placeholder='MM/DD/YYYY'
                             onChange={this.handleChange}
-                            value={this.state.end_date}
+                            value={this.state.end_time}
                         />
                     </Form.Group>
                     <Form.Field

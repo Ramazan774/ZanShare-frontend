@@ -11,14 +11,6 @@ class ProductsContainer extends React.Component {
         super(props)
     }
 
-    // componentDidMount(){
-    //     fetch('http://localhost:3000/products')
-    //     .then(resp => resp.json())
-    //     .then(products => {
-    //         this.props.fetchProductsSuccess(products)
-    //     })
-    // }
-
     renderProducts = () => {
         
         const productsList = this.props.products.filter(products => products.name.toLowerCase().includes(this.props.search.toLowerCase())|| products.description.toLowerCase().includes(this.props.search.toLowerCase()))
