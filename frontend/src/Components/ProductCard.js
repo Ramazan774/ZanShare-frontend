@@ -8,7 +8,7 @@ const ProductCard = props => {
     const link = `/products/${props.product.id}`
     
     return (
-        <div className='item'>
+        <div className='item' style={{marginLeft: '100px'}}>
             <div className='item'>
                 <h4>{`${props.product.name}`}</h4>
             </div>

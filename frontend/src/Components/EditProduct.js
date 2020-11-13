@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { editProductSuccess } from '../actions/products'
+import { selectProduct } from '../actions/products' 
 import { Form, Input, TextArea, Button, Checkbox } from 'semantic-ui-react'
-import DeleteConfirmation from './DeleteConfirmation'
+// import DeleteConfirmation from './DeleteConfirmation'
 
 class EditProduct extends React.Component {
+    
     state = {
         name: '',
         address: '',
@@ -31,31 +33,20 @@ class EditProduct extends React.Component {
         e.preventDefault()
 
         const reqObj = {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.state)
         }
 
-        fetch('http://localhost:3000/products', reqObj)
+        fetch(`http://localhost:3000/products/${this.state.id}`, reqObj)
         .then(resp => resp.json())
         .then(data => {
-            debugger
-            if(data.error) {
-                this.setState({
-                    error: data.error
-                })
-            } else {
-                this.props.addProductSuccess(data)
-                this.props.history.push('/products')
+                this.props.editProductSuccess(data)
+                this.props.history.push('/home')
             }
-        })
-    }
-
-
-    handleToggle = () => {
-        this.setState({deleteView: !this.state.deleteView})
+        )
     }
 
     render(){
@@ -119,15 +110,24 @@ class EditProduct extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.comment}
                     />
-                    <Form.Field control={Button}>Publish</Form.Field>
+                    <Form.Field control={Button}>Update</Form.Field>
                 </Form>
-                <DeleteConfirmation
-                    handleCancelClick={this.handleToggle}
-                    product={this.props.product}
-                />
             </div>
         )
     }
 }
 
-export default EditProduct
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  };
+};
+
+
+const mapDispatchToProps = {
+    selectProduct,
+    editProductSuccess
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditProduct)

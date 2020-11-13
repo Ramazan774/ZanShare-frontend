@@ -10,7 +10,8 @@ import { fetchProductsSuccess } from '../actions/products'
 class Home extends React.Component {
 
     componentDidMount(){
-        const token = localStorage.getItem('app_token')
+        let token = localStorage.getItem('app_token')
+
 
         if(!token){
             this.props.history.push('/login')

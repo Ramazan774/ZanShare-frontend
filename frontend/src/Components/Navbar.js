@@ -41,7 +41,7 @@ class Navbar extends React.Component {
                     active={activeItem === "Logout"}
                     onClick={this.handleLogout}
                     as={Link}
-                    to="/login"
+                    to="/"
                   />
                 </div>
               </Menu.Menu>

@@ -11,7 +11,7 @@ const products = (state = [], action) => {
             const newProducts = state.filter(obj => obj.id !== action.id)
                 return newProducts
             case 'EDIT_PRODUCT_SUCCESS':
-                return [...action.products]
+                return 
         default:
             return state;
     }

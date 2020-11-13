@@ -14,9 +14,9 @@ class ProductShowCard extends React.Component {
 
     render (){
         
-        const link = `/products`
+        const link = '/products'
         const button = this.props.user.id === this.props.product[0].user_id ? 
-            <Link to="/editproduct"><Button onClick={() => this.props.selectProduct(this.props.product[0].id)}>Edit</Button></Link>
+            <Link to={`/editproduct/${this.props.product[0].id}`}><Button onClick={() => this.props.selectProduct(this.props.product[0].id)}>Edit</Button></Link>
             :
             <Link to='/listings'><Button onClick={() => this.props.addListingSuccess(this.props.product[0])}>Rent</Button></Link>
 
@@ -27,8 +27,9 @@ class ProductShowCard extends React.Component {
                 <h4>Available Date: {this.props.product[0].start_time}</h4>
                 <h4>End Date: {this.props.product[0].end_time}</h4>
                 <h5>Address: {this.props.product[0].address}</h5>
-                <p>Description: {this.props.product[0].description}</p>
-                <Link to={link}><Button>Back</Button></Link>
+                <h5>Description: {this.props.product[0].description}</h5>
+                <p>Comments: {this.props.product[0].comment}</p>
+                <Link to='/products'><Button>Back</Button></Link>
                 {button}
             </div>
             )
